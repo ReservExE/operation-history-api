@@ -1,4 +1,4 @@
-package ru.netology.skokDmitriy.domain;
+package ru.netology.skokDmitriy.domain.operation;
 
 public enum Currency {
     RUB,

@@ -1,11 +1,12 @@
-package ru.netology.skokDmitriy.domain;
+package ru.netology.skokDmitriy.domain.operation;
 
 import lombok.Getter;
 import lombok.Setter;
+import ru.netology.skokDmitriy.domain.ConsolePrintable;
 
 @Getter
 @Setter
-public class CashbackTransaction extends Transaction implements ConsolePrintable{
+public class CashbackOperation extends Operation implements ConsolePrintable {
     private int cashbackAmount;
 
     @Override
