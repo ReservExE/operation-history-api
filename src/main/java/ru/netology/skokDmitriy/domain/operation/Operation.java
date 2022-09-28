@@ -1,22 +1,23 @@
-package ru.netology.skokDmitriy.domain;
+package ru.netology.skokDmitriy.domain.operation;
 
 import lombok.Getter;
 import lombok.Setter;
+import ru.netology.skokDmitriy.domain.ConsolePrintable;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class Transaction extends BaseOperation implements ConsolePrintable{
-    private OperationCreditType OperationCreditType;
+public class Operation extends BaseOperation implements ConsolePrintable {
+    private ru.netology.skokDmitriy.domain.operation.OperationCreditType OperationCreditType;
     private int transactionAmount;
     private Currency transactionCurrency;
     private String merchant;
 
-    public Transaction(){
+    public Operation(){
 
     }
-    public Transaction(int id, OperationCreditType operationCreditType, int sum, Currency currency, String merchant, LocalDateTime time){
+    public Operation(int id, OperationCreditType operationCreditType, int sum, Currency currency, String merchant, LocalDateTime time){
         super(id, time);
         this.OperationCreditType = operationCreditType;
         this.transactionAmount = sum;

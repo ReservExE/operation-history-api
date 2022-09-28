@@ -1,6 +1,7 @@
 package ru.netology.skokDmitriy.domain;
 
 import lombok.*;
+import ru.netology.skokDmitriy.domain.ConsolePrintable;
 
 import java.math.BigInteger;
 
@@ -9,7 +10,7 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class Customer implements ConsolePrintable{
+public class Customer implements ConsolePrintable {
     private int id;
     private String name;
 

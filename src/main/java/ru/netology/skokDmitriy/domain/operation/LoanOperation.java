@@ -1,11 +1,11 @@
-package ru.netology.skokDmitriy.domain;
+package ru.netology.skokDmitriy.domain.operation;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class LoanTransaction extends Transaction{
+public class LoanOperation extends Operation {
     private int loadId;
 
     @Override
