@@ -17,7 +17,7 @@ public class CustomerService {
 
             Customer newCustomer = new Customer(i, name);
 
-            customerStorageService.setElement(newCustomer, i);
+            customerStorageService.setElement(newCustomer);
 
             System.out.println("END? y/n");
             if (ioService.getNextInput().equals("y")) {

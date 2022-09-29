@@ -16,6 +16,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 }
 
+test {
+    useJUnitPlatform()
+}
+
 tasks.jar {
     manifest.attributes["Main-Class"] = "ru.netology.skokDmitriy.Main"
 }

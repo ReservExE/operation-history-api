@@ -51,7 +51,7 @@ public class OperationService {
             String merchant = ioService.getNextInput();
 
             Operation newOperation = new Operation(operationId, CREDIT, sum, currency, merchant, LocalDateTime.now());
-            operationStorageService.setElement(newOperation, operationId);
+            operationStorageService.setElement(newOperation);
             statementService.saveOperationToStatement(customerId, operationId);
 
             System.out.println("END? y/n");

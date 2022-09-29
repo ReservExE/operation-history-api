@@ -16,8 +16,8 @@ public class Main {
 
         IOService ioService = new IOService();
 
-        StorageService<Customer> customerStorageService = new StorageService<>(MAX_CUSTOMERS);
-        StorageService<Operation> operationStorageService = new StorageService<>(MAX_CUSTOMERS*OPERATIONS_PER_USER);
+        StorageService<Customer> customerStorageService = new StorageService<>();
+        StorageService<Operation> operationStorageService = new StorageService<>();
 
         StatementService statementService = new StatementService();
         CustomerService customerService = new CustomerService(customerStorageService, ioService);

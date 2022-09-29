@@ -3,29 +3,27 @@ package ru.netology.skokDmitriy.service;
 import ru.netology.skokDmitriy.domain.Customer;
 import ru.netology.skokDmitriy.domain.operation.Operation;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class StorageService<T> {
-    private T[] storage;
+    private final List<T> storage = new ArrayList<>();
 
-    public StorageService(int capacity) {
-        this.storage = (T[]) new Object[capacity];
-    }
-
-    public void setElement(T element, int position){
-        storage[position] = element;
+    public void setElement(T element){
+        storage.add(element);
     }
 
     public T getElement(int position){
-        return storage[position];
+        return storage.get(position);
     }
 
     public int getLength(){
-        return storage.length;
+        return storage.size();
     }
 
     public String toString(){
-        return Arrays.toString(storage);
+        return storage.toString();
     }
 
 }
