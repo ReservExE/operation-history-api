@@ -16,7 +16,7 @@ public class OperationService {
 
 
     private StatementService statementService;
-    private final StorageService storageService;
+    private final StorageService operationStorageService;
     private final IOService ioService;
 
     private static Currency parseCurrency(String currencyCode) {
@@ -31,7 +31,7 @@ public class OperationService {
     }
 
     public void fillOperations() {
-        for (int operationId = 0; operationId < storageService.getOperation().length; operationId++) {
+        for (int operationId = 0; operationId < operationStorageService.getLength(); operationId++) {
 
             System.out.println("Customer ID: ");
             int customerId = Integer.parseInt(ioService.getNextInput());
@@ -51,7 +51,7 @@ public class OperationService {
             String merchant = ioService.getNextInput();
 
             Operation newOperation = new Operation(operationId, CREDIT, sum, currency, merchant, LocalDateTime.now());
-            storageService.getOperation()[operationId] = newOperation;
+            operationStorageService.setElement(newOperation);
             statementService.saveOperationToStatement(customerId, operationId);
 
             System.out.println("END? y/n");
@@ -62,6 +62,6 @@ public class OperationService {
     }
 
     public String getOperations() {
-        return Arrays.toString(storageService.getOperation());
+        return operationStorageService.toString();
     }
 }
