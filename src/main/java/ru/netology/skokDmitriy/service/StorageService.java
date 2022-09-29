@@ -3,22 +3,29 @@ package ru.netology.skokDmitriy.service;
 import ru.netology.skokDmitriy.domain.Customer;
 import ru.netology.skokDmitriy.domain.operation.Operation;
 
-public class StorageService {
+import java.util.Arrays;
 
-    public static final int MAX_CUSTOMERS = 100;
-    public static final int OPERATIONS_PER_USER = 100;
+public class StorageService<T> {
+    private T[] storage;
 
-    private final Customer[] customers = new Customer[MAX_CUSTOMERS];
-    private  final Operation[] operations = new Operation[OPERATIONS_PER_USER * MAX_CUSTOMERS];
-    public  final int[][] statement = new int[MAX_CUSTOMERS][OPERATIONS_PER_USER];
+    public StorageService(int capacity) {
+        this.storage = (T[]) new Object[capacity];
+    }
 
-    public Customer[] getCustomers(){
-        return customers;
+    public void setElement(T element, int position){
+        storage[position] = element;
     }
-    public Operation[] getOperation(){
-        return operations;
+
+    public T getElement(int position){
+        return storage[position];
     }
-    public int[][] getStatement(){
-        return statement;
+
+    public int getLength(){
+        return storage.length;
     }
+
+    public String toString(){
+        return Arrays.toString(storage);
+    }
+
 }

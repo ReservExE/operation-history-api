@@ -2,14 +2,14 @@ package ru.netology.skokDmitriy.service;
 
 import lombok.AllArgsConstructor;
 
-import static ru.netology.skokDmitriy.service.StorageService.MAX_CUSTOMERS;
-import static ru.netology.skokDmitriy.service.StorageService.OPERATIONS_PER_USER;
+import static ru.netology.skokDmitriy.utils.Constants.MAX_CUSTOMERS;
+import static ru.netology.skokDmitriy.utils.Constants.OPERATIONS_PER_USER;
+
 @AllArgsConstructor
 public class StatementService {
 
 
     public static final int[] customerNextTransactionIdArray = new int[MAX_CUSTOMERS];
-    private final StorageService storageService;
 
     public static int findCustomerNextTransaction(int CustomerId) {
         return customerNextTransactionIdArray[CustomerId];
@@ -17,7 +17,7 @@ public class StatementService {
 
     public void saveOperationToStatement(int customerId, int operationId) {
         int customerNextTransactionId = findCustomerNextTransaction(customerId);
-        storageService.getStatement()[customerId][customerNextTransactionId] = operationId;
+        StatementStorageService.getStatement()[customerId][customerNextTransactionId] = operationId;
         customerNextTransactionIdArray[customerId] = customerNextTransactionIdArray[customerId] + 1;
     }
 
