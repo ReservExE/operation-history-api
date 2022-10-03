@@ -10,26 +10,35 @@ import java.time.LocalDateTime;
 @Setter
 public class Operation extends BaseOperation implements ConsolePrintable {
     private ru.netology.skokDmitriy.domain.operation.OperationCreditType OperationCreditType;
-    private int transactionAmount;
-    private Currency transactionCurrency;
+    private int sum;
+    private Currency currency;
     private String merchant;
+    private int customerId;
 
     public Operation(){
 
     }
+
+    public Operation(int sum, Currency currency, String merchant){
+        this.sum = sum;
+        this.currency = currency;
+        this.merchant = merchant;
+
+        System.out.println("Operation created");
+    }
     public Operation(int id, OperationCreditType operationCreditType, int sum, Currency currency, String merchant, LocalDateTime time){
         super(id, time);
         this.OperationCreditType = operationCreditType;
-        this.transactionAmount = sum;
-        this.transactionCurrency = currency;
+        this.sum = sum;
+        this.currency = currency;
         this.merchant = merchant;
 
-        System.out.println("Transaction created");
+        System.out.println("Operation created");
     }
 
     public String toString() {
-        return "ID:" + super.getId() + " | Amount: " + this.transactionAmount + " | currency " +
-                this.transactionCurrency + " | in " + merchant;
+        return "ID:" + super.getId() + " | Amount: " + this.sum + " | currency " +
+                this.currency + " | in " + merchant;
     }
 
     public void printToConsole(){

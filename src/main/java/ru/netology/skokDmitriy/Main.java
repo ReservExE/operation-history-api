@@ -28,12 +28,6 @@ public class Main {
 
         System.out.println(operationService.getOperations());
     }
-
-
-
-
-
-
 }
 
 
