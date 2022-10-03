@@ -30,6 +30,11 @@ public class OperationService {
         }
     }
 
+    public void processOperation(Operation operation, int customerId){
+        operationStorageService.setElement(operation);
+        statementService.saveOperationToStatement(customerId, operation.getId());
+    }
+
     public void fillOperations() {
         for (int operationId = 0; operationId < operationStorageService.getLength(); operationId++) {
 
@@ -51,8 +56,8 @@ public class OperationService {
             String merchant = ioService.getNextInput();
 
             Operation newOperation = new Operation(operationId, CREDIT, sum, currency, merchant, LocalDateTime.now());
-            operationStorageService.setElement(newOperation);
-            statementService.saveOperationToStatement(customerId, operationId);
+
+            processOperation(newOperation, customerId);
 
             System.out.println("END? y/n");
             if (ioService.getNextInput().equals("y")) {
