@@ -1,17 +1,18 @@
 package ru.netology.skokDmitriy.service;
 
+import lombok.RequiredArgsConstructor;
 import ru.netology.skokDmitriy.domain.operation.Operation;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
+@RequiredArgsConstructor
 public class AsyncOperationService {
     private final Queue<Operation> operations = new LinkedList<>();
-
     private final OperationService operationService;
 
-    public boolean addOperation(Operation operation, int customerId) {
-        return operations.offer(operation, );
+    public boolean addOperation(Operation operation) {
+        System.out.println("Operation added for processing " + operation);
+        return operations.offer(operation);
     }
 
     public void startProcessing() {
@@ -22,6 +23,7 @@ public class AsyncOperationService {
 
             }
         };
+        t.start();
     }
 
     private void processQueue() {
@@ -42,7 +44,7 @@ public class AsyncOperationService {
         }
     }
 
-    private void processOperation(Operation operation, int customerId) {
-        operationService.processOperation(operation, customerId);
+    private void processOperation(Operation operation) {
+        operationService.processOperation(operation);
     }
 }
