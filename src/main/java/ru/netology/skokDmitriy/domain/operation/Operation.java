@@ -7,6 +7,7 @@ import lombok.ToString;
 import ru.netology.skokDmitriy.domain.ConsolePrintable;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -33,5 +34,18 @@ public class Operation extends BaseOperation {
 
     public void printToConsole(){
         System.out.println(this.toString());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Operation operation = (Operation) o;
+        return sum == operation.sum && customerId == operation.customerId && OperationCreditType == operation.OperationCreditType && currency == operation.currency && Objects.equals(merchant, operation.merchant);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(OperationCreditType, sum, currency, merchant, customerId);
     }
 }

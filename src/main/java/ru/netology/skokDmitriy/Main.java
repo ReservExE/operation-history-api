@@ -7,23 +7,15 @@ import ru.netology.skokDmitriy.service.*;
 
 import java.util.Scanner;
 
-import static ru.netology.skokDmitriy.utils.Constants.MAX_CUSTOMERS;
-import static ru.netology.skokDmitriy.utils.Constants.OPERATIONS_PER_USER;
 
 
 public class Main {
 
     public static void main(String[] args) {
-        IOService ioService = new IOService();
-
-        StorageService<Customer> customerStorageService = new StorageService<>();
-        StorageService<Operation> operationStorageService = new StorageService<>();
-
         StatementService statementService = new StatementService();
-        CustomerService customerService = new CustomerService(customerStorageService, ioService);
-        OperationService operationService = new OperationService(statementService, operationStorageService, ioService);
+        CustomerService customerService = new CustomerService();
 
-        AsyncOperationService asyncOperationService = new AsyncOperationService(operationService);
+        AsyncOperationService asyncOperationService = new AsyncOperationService(statementService);
         asyncOperationService.startProcessing();
 
         Operation o1 = new Operation(OperationCreditType.CREDIT, 100, Currency.RUB, "shoko", 0);
@@ -42,11 +34,7 @@ public class Main {
         Operation o4 = new Operation(OperationCreditType.CREDIT, 400, Currency.RUB, "shoko", 0);
         asyncOperationService.addOperation(o4);
 
-
-        //customerService.fillCustomers();
-        //operationService.fillOperations();
-
-        System.out.println(operationService.getOperations());
+        System.out.println(statementService.getOperations());
     }
 }
 

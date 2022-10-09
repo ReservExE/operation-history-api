@@ -8,7 +8,7 @@ import java.util.Queue;
 @RequiredArgsConstructor
 public class AsyncOperationService {
     private final Queue<Operation> operations = new LinkedList<>();
-    private final OperationService operationService;
+    private final StatementService statementService;
 
     public boolean addOperation(Operation operation) {
         System.out.println("Operation added for processing " + operation);
@@ -45,6 +45,6 @@ public class AsyncOperationService {
     }
 
     private void processOperation(Operation operation) {
-        operationService.processOperation(operation);
+        statementService.saveOperation(operation);
     }
 }
