@@ -1,14 +1,22 @@
 package ru.netology.skokDmitriy.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import ru.netology.skokDmitriy.configuration.OperationProcessingProperties;
+import ru.netology.skokDmitriy.domain.operation.Currency;
 import ru.netology.skokDmitriy.domain.operation.Operation;
+import ru.netology.skokDmitriy.domain.operation.OperationCreditType;
 
+import javax.annotation.PostConstruct;
 import java.util.LinkedList;
 import java.util.Queue;
+@Component
 @RequiredArgsConstructor
-public class AsyncOperationService {
+public class AsyncInputOperationService {
     private final Queue<Operation> operations = new LinkedList<>();
     private final StatementService statementService;
+    private final OperationProcessingProperties properties;
 
     public boolean addOperation(Operation operation) {
         System.out.println("Operation added for processing " + operation);
@@ -32,11 +40,10 @@ public class AsyncOperationService {
             if (operation == null) {
                 try {
                     System.out.println("No operations");
-                    Thread.sleep(1_000);
+                    Thread.sleep(properties.getSleepMilliSeconds());
                 } catch (InterruptedException e) {
                     System.out.println(e);
                 }
-                //TODO wait
             } else {
                 System.out.println("Processing operation " + operation);
                 processOperation(operation);
@@ -46,5 +53,13 @@ public class AsyncOperationService {
 
     private void processOperation(Operation operation) {
         statementService.saveOperation(operation);
+    }
+    @PostConstruct
+    public void init(){
+
+        this.startProcessing();
+        addOperation(new Operation(OperationCreditType.CREDIT, 100, Currency.RUB, "testShop", 1));
+        addOperation(new Operation(OperationCreditType.CREDIT, 200, Currency.RUB, "testShop", 2));
+        addOperation(new Operation(OperationCreditType.CREDIT, 300, Currency.RUB, "testShop", 2));
     }
 }
