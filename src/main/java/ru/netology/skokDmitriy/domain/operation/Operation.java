@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.cglib.core.Local;
 import ru.netology.skokDmitriy.domain.ConsolePrintable;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @ToString
 public class Operation extends BaseOperation {
+    private int id;
+    private LocalDateTime time;
     private ru.netology.skokDmitriy.domain.operation.OperationCreditType OperationCreditType;
     private int sum;
     private Currency currency;
@@ -24,10 +27,14 @@ public class Operation extends BaseOperation {
 
     }
 
-    public Operation(int sum, Currency currency, String merchant){
+    public Operation(OperationCreditType operationCreditType ,int sum, Currency currency, String merchant, int customerId){
+        this.OperationCreditType = operationCreditType;
         this.sum = sum;
         this.currency = currency;
         this.merchant = merchant;
+        this.customerId = customerId;
+        this.id = this.hashCode();
+        this.time = LocalDateTime.now();
 
         System.out.println("Operation created");
     }
