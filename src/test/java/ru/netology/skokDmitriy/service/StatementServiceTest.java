@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //addOperation(new Operation(OperationCreditType.CREDIT, 300, Currency.RUB, "testShop", 2));
 class StatementServiceTest {
     @Autowired
-    StatementService statementService;
+    StatementService statementService = new StatementService();
 
     @Test
     public void getStatementTest(){
@@ -36,8 +36,11 @@ class StatementServiceTest {
         assertEquals(3, operations.size());
 
         Operation operation1 = operations.get(1);
-        statementService.deleteOperation(operation1.hashCode());
+        System.out.println(operation1);
+        assertEquals(operation1, statementService.deleteOperation(operation1.hashCode()));
+
         List<Operation> operations2 = statementService.getAllOperations();
-        assertEquals(2, operations.size());
+        assertEquals(2, operations2.size());
+
     }
 }
