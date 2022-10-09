@@ -26,15 +26,18 @@ public class StatementService {
         }
     }
 
-    public void deleteOperation(int operationID){
+    public Operation deleteOperation(int operationID){
+        Operation operation = new Operation();
         for(List<Operation> list: storage.values()){
             for(Operation operationIter: list){
                 if(operationIter.getId() == operationID){
                     list.remove(operationIter);
+                    operation = operationIter;
                     break;
                 }
             }
         }
+        return operation;
     }
 
     public List<Operation> getCustomerOperations(int customerID){
