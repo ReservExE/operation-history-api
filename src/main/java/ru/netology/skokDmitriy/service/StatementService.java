@@ -1,27 +1,26 @@
 package ru.netology.skokDmitriy.service;
 
 import lombok.AllArgsConstructor;
+import ru.netology.skokDmitriy.domain.operation.Operation;
 
-import static ru.netology.skokDmitriy.utils.Constants.MAX_CUSTOMERS;
-import static ru.netology.skokDmitriy.utils.Constants.OPERATIONS_PER_USER;
+import java.util.*;
 
 @AllArgsConstructor
 public class StatementService {
+    private final Map<Integer, List<Operation>> storage = new HashMap<>();
 
-
-    public static final int[] customerNextTransactionIdArray = new int[MAX_CUSTOMERS];
-
-    public static int findCustomerNextTransaction(int CustomerId) {
-        return customerNextTransactionIdArray[CustomerId];
+    public void saveOperation(Operation operation) {
+        List<Operation> operations = storage.get(operation.getCustomerId());
+        if (operations == null){
+            List<Operation> customerOperations = new ArrayList<>();
+            customerOperations.add(operation);
+            storage.put(operation.getCustomerId(), customerOperations);
+        } else {
+            operations.add(operation);
+        }
     }
 
-    public void saveOperationToStatement(int customerId, int operationId) {
-        int customerNextTransactionId = findCustomerNextTransaction(customerId);
-        StatementStorageService.getStatement()[customerId][customerNextTransactionId] = operationId;
-        customerNextTransactionIdArray[customerId] = customerNextTransactionIdArray[customerId] + 1;
-    }
-
-    public static boolean customerCanStoreNextTransaction(int CustomerId) {
-        return customerNextTransactionIdArray[CustomerId] != OPERATIONS_PER_USER;
+    public String getOperations(){
+        return storage.toString();
     }
 }
